@@ -44,6 +44,22 @@ namespace MoodAnalyserUnitTests
                 throw new MoodAnalyserNull("HAPPY");
             }
         }
+        public string AnalyseMood()
+        {
+            try
+            {
+                if (sentence.ToLower().Contains("sad"))
+                    return "SAD";
+                if (sentence.Equals(string.Empty))
+                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EMPTY_MOOD, "Mood should not be empty");
+                return "HAPPY";
+
+            }
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NULL_MOOD, "Mood should not be null");
+            }
+        }
 
 
     }
