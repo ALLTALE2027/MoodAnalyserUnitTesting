@@ -19,7 +19,6 @@ namespace MoodAnalyserUnitTests
             this.sentence = input;
         }
 
-
         public string AnalysisMoodWithDefaultConstructor(string sentence)
         {
             return sentence.ToLower().Contains("sad") ? "SAD" : "HAPPY";
@@ -28,6 +27,22 @@ namespace MoodAnalyserUnitTests
         {
 
             return sentence.ToLower().Contains("sad") ? "SAD" : "HAPPY";
+        }
+
+        public string AnalyseMoodException()
+        {
+            try
+            {
+                if (sentence.ToLower().Contains("sad"))
+
+                    return "SAD";
+                else
+                    return "HAPPY";
+            }
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalyserNull("HAPPY");
+            }
         }
 
 
