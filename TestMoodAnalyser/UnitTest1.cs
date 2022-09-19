@@ -98,7 +98,7 @@ namespace TestMoodAnalyser
             try
             {
                 object expected = new MoodAnalyser();
-                object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyserUnitTests.Moodanalyzer", "MoodAnalyser");
+                object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyser.MoodAnalyser", "MoodAnalyser");
                 expected.Equals(obj);
             }
             catch (MoodAnalyserException exception)
@@ -113,6 +113,52 @@ namespace TestMoodAnalyser
             {
                 object expected = new MoodAnalyser();
                 object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyserUnitTests.MoodAnalyzer", "Moodanalyser");
+                expected.Equals(obj);
+            }
+            catch (MoodAnalyserException exception)
+            {
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.NO_CONSTRUCTOR_FOUND, exception.exceptionType);
+            }
+        }
+
+        [Test]
+        public void
+           CreateMoodAnalyserUsingParametrisedConstructor_GivenProperClassName_shouldReturnMoodAnalyserObject()
+        {
+            string message = "Today I am happy";
+            //object expected = new Moodanalyzer(message);
+            object obj = MoodAnalyserFactory.CreateMoodAnalyserUsingParametrisedConstructor("MoodAnalyserUnitTests.MoodAnalyser", "MoodAnalyser", message);
+            Assert.IsInstanceOf(typeof(MoodAnalyser), obj);
+        }
+
+        [Test]
+        public void
+            CreateMoodAnalyserUsingParametrisedConstructor_GivenInProperClassName_shouldReturnClassNotFound()
+        {
+            try
+            {
+                string message = "Today I am happy";
+                object expected = new MoodAnalyser(message);
+                object obj =MoodAnalyserFactory.CreateMoodAnalyserUsingParametrisedConstructor("MoodAnalyserUnitTests.Moodanalyser","MoodAnalyser", message);
+                expected.Equals(obj);
+            }
+            catch (MoodAnalyserException exception)
+            {
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.NO_CLASS_FOUND, exception.exceptionType);
+            }
+        }
+
+        [Test]
+        public void
+            CreateMoodAnalyserUsingParametrisedConstructor_GivenInProperConstructorName_shouldReturnConstructorNotFound()
+        {
+            try
+            {
+                string message = "Today I am happy";
+                object expected = new MoodAnalyser(message);
+                object obj =
+                    MoodAnalyserFactory.CreateMoodAnalyserUsingParametrisedConstructor("MoodAnalyserUnitTests.MoodAnalyser",
+                        "Moodanalyser", message);
                 expected.Equals(obj);
             }
             catch (MoodAnalyserException exception)
