@@ -12,6 +12,8 @@ namespace MoodAnalyserUnitTests
         {
             EMPTY_MOOD,
             NULL_MOOD,
+            NO_CLASS_FOUND,
+            NO_CONSTRUCTOR_FOUND
         }
         public ExceptionType exceptionType;
 
